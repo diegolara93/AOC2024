@@ -3,7 +3,7 @@ use std::io::prelude::*;
 use std::vec;
 
 fn main() -> std::io::Result<()> {
-    let mut ans: i32 = 0;
+    let mut ans: usize = 0;
     let mut file = File::open("./input.txt")?;
     let mut contents = String::new();
     file.read_to_string(&mut contents)?;
@@ -22,10 +22,12 @@ fn main() -> std::io::Result<()> {
             nums2.push(nums[i]);
         }
     }
-    nums1.sort();
-    nums2.sort();
+   //nums1.sort();
+    //nums2.sort();
     for i in 0..nums1.len() {
-        ans += (nums1[i] - nums2[i]).abs();
+        // ans += (nums1[i] - nums2[i]).abs(); FOR PART 1
+        let temp = nums2.iter().filter(|&n| *n == nums1[i]).count();
+        ans += temp * nums1[i] as usize;
     }
     println!("The answer for day one is: {}", ans);
     Ok(())
